@@ -40,7 +40,7 @@ export async function generateMetadata(
     }
 
     const file = data.result[0];
-    const title = `${file.title} - ${SITENAME}`;
+    const title = `${file.title}`;
     const description = `${file.title} di ${SITENAME} Video Bokep Indo Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`;
     const image = file.splash_img;
     const previousOgImages = (await parent).openGraph?.images || [];
@@ -84,29 +84,8 @@ export default async function Video({ params }: PageProps) {
     const file = data.result[0];
 	const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'VideoObject',
-        name: `${file.title} - ${SITENAME}`,
-        thumbnailUrl: file.splash_img,
-        description: `${file.title} di ${SITENAME} Video Bokep Indo Jepang Jav Barat Simontok Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`,
-        url: `https://bokeptiktoker.pages.dev/v/${file.filecode}`,
-        embedUrl: `https://doodstream.com/e/${file.filecode}`,
-        uploadDate: new Date(
-            file.uploaded + ".000Z"
-        ).toISOString(),
-        publisher: {
-            '@type': 'Organization',
-            name: `${SITENAME}`,
-            logo: 'https://bokeptiktoker.pages.dev/favicon.ico'},
-            author: {
-                '@type': 'Person',
-                name: 'admin',
-                url: 'https://bokeptiktoker.pages.dev'
-              }
-        }
-        const jsonLd2 = {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: `${file.title} - ${SITENAME}`,
+        '@type': 'WebPage',
+        name: `${file.title}`,
         image: file.splash_img,
         description: `${file.title} di ${SITENAME} Video Bokep Indo Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`,
         url: `https://bokeptiktoker.pages.dev/v/${file.filecode}`,
@@ -123,8 +102,38 @@ export default async function Video({ params }: PageProps) {
                 url: 'https://bokeptiktoker.pages.dev'
               }
         }
+        const jsonLd2 = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: `${file.title}`,
+        image: file.splash_img,
+        description: `${file.title} di ${SITENAME} Video Bokep Indo Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`,
+        url: `https://bokeptiktoker.pages.dev/v/${file.filecode}`,
+        datePublished: new Date(
+            file.uploaded + ".000Z"
+        ).toISOString(),
+        publisher: {
+            '@type': 'Organization',
+            name: `${SITENAME}`,
+            logo: 'https://bokeptiktoker.pages.dev/favicon.ico'},
+            author: {
+                '@type': 'Person',
+                name: 'admin',
+                url: 'https://bokeptiktoker.pages.dev'
+              }
+        }
+        
     return (
-        <div className="grid col-span-full gap-4 md:gap-4 md:mx-10">
+        <div className="grid col-span-full gap-4 md:gap-4 md:mx-10" itemProp="video" itemScope itemType="http://schema.org/VideoObject">
+<meta itemProp="author" content="admin" />
+<meta itemProp="name" content={`${file.title}`} />
+<meta itemProp="description" content={`${file.title} di ${SITENAME} Video Bokep Indo Viral Terbaru Bocil Ngentot Jilbab Smp Mama Sma`} />
+<meta itemProp="duration" content={`${file.length}`} />
+<meta itemProp="thumbnailUrl" content={`${file.splash_img}`} />
+<meta itemProp="embedURL" content={`https://doodstream.com/e/${file.filecode}`} />
+<meta itemProp="uploadDate" content={`${new Date(
+            file.uploaded + ".000Z"
+        ).toISOString()}`} />
         <section>
         {/* Add JSON-LD to your page */}
         <script
